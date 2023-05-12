@@ -1,0 +1,21 @@
+version: "3"
+services:
+  posts:
+    image: shubhamagg/posts
+    environment:  
+      PORT: 3031
+      MONGO_DB_URL: mongodb://posts-mongodb:27017/posts-db
+    ports:
+      - 3031:3031
+    depends_on:
+      - posts-mongodb
+
+  posts-mongodb:
+    image: mongo:4.2
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    volumes:
+      - /Users/shubhamaggarwal/App/Workstation/k8s-hands-on/infra/volumes/posts:/data/db
+    ports:
+      - 23017:27017
